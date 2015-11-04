@@ -29,6 +29,8 @@ For those candidates coming in through third party recruiters and personal recom
 
 I encourage the next person who handles hiring to be dilligent about the challenge they select. Something too hard can be off putting to legitimate candidates. This is esspecially true for senior candidates. However, we've realistically never hired a candidate from a resume; all of our hires have been through personal recommendations/connections, career fairs, or third party recruiters.
 
+The coding challenge I have been using has simply been the set implementation we have used when the tech screen is administered 1-on-1 with a developer. You can find a default email reply containing an attachment describing the challenge to the candidate on workable labeled `Take home tech screen (set)`.
+
 # NT Activity Summary
 
 The NT Activity Summary is meant to be an entrepreneur facing Daily Recap. It pushes event data to cassandra, where that data is later retrieved from, aggregated, and used to produce an email that will be sent to the NT weekly. 

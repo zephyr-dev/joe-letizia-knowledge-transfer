@@ -7,6 +7,10 @@ InvestorGroups::DocumentsExport::Orchestrator.new(investor_group).export(s3_buck
 ```
 The best way to call it is from the Rails console on production. Many background jobs will be enqueued to the `externally_enqueued` resque queue. __Make sure to spin up workers after enqueuing the jobs.__ Depending on the size of the group, the documents could end up taking up several GB on S3. 
 
+After the background jobs are all complete, __make sure to ramp the worker count back down__ as not to pay for workers we don't need. 
+
+To get the documents to Kellen, I generally sync'd the bucket to my local machine using the aws-cli tool. You can find the documentation [here](http://docs.aws.amazon.com/cli/latest/reference/s3/sync.html). I would then zip that local folder and upload that zip to google drive and share it with Kellen. You COULD make the s3 folder public, but that's a bit risky.
+
 # Group Data Export
 The group data export is similar to the group document export in that it was written for Kellen when we had many customers leaving the platform. This export generates a series of CSV files that contain the investor group's data. 
 To invoke the data exporter, go to `https://gust.com/admin/reports/investor_group_data_extract` as a Gust admin. You will be prompted to select an investor group from the drop down. Submit, and a report will be emailed to you when it is completed. __NOTE:__ If the group you are exporting data for is particularly large (such as Sand Hill Angels or perhaps New York Angels), the background worker jobs on Heroku might fail becuase they don't have enough memory. If you run into this, you can invoke these jobs from the local rails console and set your DB url to that of the production DB, or you can use higher end workers for the background workers (__make sure to set them back afterwards__).

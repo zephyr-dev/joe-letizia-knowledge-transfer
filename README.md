@@ -1,6 +1,8 @@
 # Group Document Export
 The group document exporter is a feature that takes all documents that an investor group may be interested in and exports them to a single, organized, S3 bucket. I wrote this for Kellen when we were losing a lot of customers to ProSeeder so that we could give those customers their data. I meant to embed this in the admin panel of Zephyr, but I never got around to it. Plus, given its nature of being distributed across many background jobs, I wasn't sure how to check for completion, and what the feedback should be on completion. 
 
+** Before you run this create a bucket on S3 and then given the zephyr-s3-production IAM user access to the bucket via policy **
+
 The bulk of the code can be found in the `app/models/investor_groups/document_export` folder. To invoke the exporter, call: 
 ```
 InvestorGroups::DocumentsExport::Orchestrator.new(investor_group).export(s3_bucket_name)
